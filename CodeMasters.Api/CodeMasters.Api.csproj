@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeMasters.Domain\CodeMasters.Domain.csproj" />
-    <ProjectReference Include="..\Infrastructure\CodeMasters.Infrastructure.csproj" />
+    <ProjectReference Include="..\CodeMasters.Infrastructure\CodeMasters.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
