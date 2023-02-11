@@ -12,7 +12,7 @@ namespace CodeMasters.UnitTests
         [Fact]
         public void CalculateShouldReturnDivideByZeroException()
         {
-            var left = _faker.Random.Decimal();
+            var left = _faker.Random.Double();
             var right = 0;
 
             var remainder = new Remainder();

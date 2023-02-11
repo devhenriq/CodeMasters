@@ -19,7 +19,13 @@ namespace CodeMasters.Domain.Services
             var challengeTask = await _taskRepository.GetAsync();
             var operation = _factory.CreateOperation(challengeTask.Operation);
             var result = operation.Calculate(challengeTask.Left, challengeTask.Right);
-            await _taskRepository.SubmitAsync(challengeTask.Id, result);
+            challengeTask.SetResult(result);
+            await _taskRepository.SubmitAsync(challengeTask);
+        }
+
+        public async Task<IEnumerable<ChallengeTask>> GetExecutedTasks()
+        {
+            return await _taskRepository.GetExecutedTasks();
         }
     }
 }

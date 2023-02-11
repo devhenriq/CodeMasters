@@ -2,7 +2,7 @@
 {
     public class Remainder : IOperation
     {
-        public decimal Calculate(decimal left, decimal right)
+        public double Calculate(double left, double right)
         {
             if (right == 0) throw new DivideByZeroException();
             return left % right;

@@ -2,6 +2,6 @@
 {
     public interface IOperation
     {
-        decimal Calculate(decimal left, decimal right);
+        double Calculate(double left, double right);
     }
 }

@@ -3,6 +3,7 @@
     public interface ITaskRepository
     {
         Task<ChallengeTask> GetAsync();
-        Task SubmitAsync(Guid id, decimal result);
+        Task<IEnumerable<ChallengeTask>> GetExecutedTasks();
+        Task SubmitAsync(ChallengeTask task);
     }
 }

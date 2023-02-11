@@ -2,13 +2,13 @@
 {
     public record SubmitTaskRequest
     {
-        public SubmitTaskRequest(Guid id, decimal result)
+        public SubmitTaskRequest(Guid id, double result)
         {
             Id = id;
             Result = result;
         }
 
         public Guid Id { get; }
-        public decimal Result { get; }
+        public double Result { get; }
     }
 }

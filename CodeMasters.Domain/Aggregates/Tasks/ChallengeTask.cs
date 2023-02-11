@@ -2,7 +2,7 @@
 {
     public record ChallengeTask
     {
-        public ChallengeTask(Guid id, string operation, decimal left, decimal right)
+        public ChallengeTask(Guid id, string operation, double left, double right)
         {
             Id = id;
             Operation = operation;
@@ -10,9 +10,14 @@
             Right = right;
         }
 
-        public Guid Id { get; }
-        public string Operation { get; }
-        public decimal Left { get; }
-        public decimal Right { get; }
+        public Guid Id { get; private set; }
+        public string Operation { get; private set; }
+        public double Left { get; private set; }
+        public double Right { get; private set; }
+        public double Result { get; private set; }
+        public void SetResult(double result)
+        {
+            Result = result;
+        }
     }
 }

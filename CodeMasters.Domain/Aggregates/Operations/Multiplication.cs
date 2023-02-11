@@ -2,6 +2,6 @@
 {
     public class Multiplication : IOperation
     {
-        public decimal Calculate(decimal left, decimal right) => left * right;
+        public double Calculate(double left, double right) => left * right;
     }
 }

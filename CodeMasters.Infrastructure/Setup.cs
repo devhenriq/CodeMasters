@@ -1,6 +1,8 @@
 ﻿using CodeMasters.Domain.Entities;
+using CodeMasters.Infrastructure.Context;
 using CodeMasters.Infrastructure.HttpClients;
 using CodeMasters.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -14,6 +16,7 @@ namespace CodeMasters.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddDbContext<ChallengeContext>(options => options.UseInMemoryDatabase("ChallengeDb"));
             services.AddChallengeClient(configuration);
         }
 

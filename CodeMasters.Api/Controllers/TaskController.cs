@@ -14,6 +14,11 @@ namespace CodeMasters.Api.Controllers
             _taskService = taskService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetExecutedTasksAsync()
+        {
+            return Ok(await _taskService.GetExecutedTasks());
+        }
 
         [Time]
         [HttpPost]
