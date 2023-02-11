@@ -1,6 +1,8 @@
 ﻿using CodeMasters.Domain.Aggregates.Tasks;
 using CodeMasters.Domain.Factories;
+using CodeMasters.Domain.Handlers;
 using CodeMasters.Domain.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeMasters.Domain
@@ -11,6 +13,11 @@ namespace CodeMasters.Domain
         {
             services.AddScoped<IOperationFactory, OperationFactory>();
             services.AddScoped<ITaskService, TaskService>();
+        }
+
+        public static void UseDomain(this IApplicationBuilder app)
+        {
+            app.AddExceptionHandler();
         }
     }
 }
