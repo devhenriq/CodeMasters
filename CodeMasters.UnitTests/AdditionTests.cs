@@ -4,10 +4,6 @@ namespace CodeMasters.UnitTests
 {
     public class AdditionTests
     {
-        public AdditionTests()
-        {
-            new Mock<IOperation>();
-        }
         [Fact]
         public void CalculateShouldReturnAddedNumbers()
         {
