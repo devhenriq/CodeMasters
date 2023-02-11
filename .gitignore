@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 /CodeMasters/FodyWeavers.xml
 /CodeMasters/FodyWeavers.xsd
+/CodeMasters.Api/FodyWeavers.xml
+/CodeMasters.Api/FodyWeavers.xsd

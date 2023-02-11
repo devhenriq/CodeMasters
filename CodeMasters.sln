@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMasters.Api", "CodeMasters\CodeMasters.Api.csproj", "{4C1D42B9-7D98-4FEE-B2B2-3C4488FF0156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMasters.Api", "CodeMasters.Api\CodeMasters.Api.csproj", "{4C1D42B9-7D98-4FEE-B2B2-3C4488FF0156}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMasters.Infrastructure", "Infrastructure\CodeMasters.Infrastructure.csproj", "{95187789-2FB6-448A-8CAB-D51A517C0BAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMasters.Infrastructure", "CodeMasters.Infrastructure\CodeMasters.Infrastructure.csproj", "{95187789-2FB6-448A-8CAB-D51A517C0BAD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMasters.Domain", "CodeMasters.Domain\CodeMasters.Domain.csproj", "{FE337095-4094-4C2E-8C14-29380A1228EE}"
 EndProject
