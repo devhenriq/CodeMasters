@@ -4,6 +4,15 @@ The project and the tests are well configured to run on Visual Studio Community 
  ```csharp
 dotnet run --project CodeMasters.Api
 ```
+
+Running the CodeMasters.Api project in Visual Studio will enable you to choose between some launch profiles
+
+Available launch profiles:
+* http
+* https
+* IIS Express
+* Docker
+
 # How to run the tests by command line
 ```csharp
 dotnet test
