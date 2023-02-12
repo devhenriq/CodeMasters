@@ -15,11 +15,11 @@ namespace CodeMasters.IntegrationTests
         private readonly Faker _faker;
         public TaskRepositoryTests()
         {
-            _context = TestDbContextFactory.CreateFakeDb();
+            _context = TestDbContextFactory.CreateFakeDb("TaskRepositoryTestDb");
             _faker = new Faker();
         }
 
-        [Fact]
+        [Fact(DisplayName = "On get should return task with expected id")]
         public async Task GetAsyncShouldReturnChallengeClientTask()
         {
             //Arrange
@@ -35,7 +35,7 @@ namespace CodeMasters.IntegrationTests
             task.Id.Should().Be(expectedTask.Id);
         }
 
-        [Fact]
+        [Fact(DisplayName = "On get should save task in the database")]
         public async Task GetAsyncShouldSaveChallengeClientTaskOnDatabase()
         {
             //Arrange
@@ -48,10 +48,10 @@ namespace CodeMasters.IntegrationTests
             await taskRepository.GetAsync();
 
             //Assert
-            _context.Tasks.FirstOrDefault(task => task.Id == expectedTask.Id).Should().NotBeNull();
+            _context.Tasks.First(task => task.Id == expectedTask.Id).Id.Should().Be(expectedTask.Id);
         }
 
-        [Fact]
+        [Fact(DisplayName = "On submit should update task adding result on database")]
         public async Task SubmitAsyncShouldSaveChallengeResultOnDabatase()
         {
             //Arrange
@@ -72,7 +72,7 @@ namespace CodeMasters.IntegrationTests
             _context.Tasks.First(task => task.Id == expectedTask.Id).Result.Should().Be(expectedTask.Result);
         }
 
-        [Fact]
+        [Fact(DisplayName = "On submit should throw InvalidInputException when ChallengeClient throws bad request exception")]
         public async Task SubmitAsyncShouldThrowInvalidInputExceptionWhenChallengeClientThrowsException()
         {
             //Arrange
@@ -92,7 +92,7 @@ namespace CodeMasters.IntegrationTests
             await onSubmit.Should().ThrowAsync<InvalidInputException>();
         }
 
-        [Fact]
+        [Fact(DisplayName = "On submit should throw EntityNotFoundException when ChallengeClient throws not found exception")]
         public async Task SubmitAsyncShouldThrowEntityNotFoundExceptionWhenChallengeClientThrowsException()
         {
             //Arrange

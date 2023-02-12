@@ -16,10 +16,10 @@ namespace CodeMasters.IntegrationTests
         public TaskControllerTests(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
-            _context = TestDbContextFactory.CreateFakeDb();
+            _context = TestDbContextFactory.CreateFakeDb("TaskControllerTestsDb");
         }
 
-        [Fact]
+        [Fact(DisplayName = "On get task should return ok http status code")]
         public async Task GetShouldReturnOk()
         {
             //Arrange
@@ -30,7 +30,7 @@ namespace CodeMasters.IntegrationTests
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Fact]
+        [Fact(DisplayName = "On post task should return no content http status code")]
         public async Task ExecuteAsyncShouldReturnNoContent()
         {
             //Arrange
@@ -41,7 +41,7 @@ namespace CodeMasters.IntegrationTests
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
-        [Fact]
+        [Fact(DisplayName = "On post task should return not found when ChallengeClient throws not found exception")]
         public async Task ExecuteAsyncShouldReturnNotFound()
         {
             //Arrange
@@ -66,7 +66,7 @@ namespace CodeMasters.IntegrationTests
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
-        [Fact]
+        [Fact(DisplayName = "On post task should return bad request when ChallengeClient throws bad request exception")]
         public async Task ExecuteAsyncShouldReturnBadRequest()
         {
             //Arrange

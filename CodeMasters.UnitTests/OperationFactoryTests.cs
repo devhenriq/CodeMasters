@@ -6,7 +6,7 @@ namespace CodeMasters.UnitTests
 {
     public class OperationFactoryTests
     {
-        [Fact]
+        [Fact(DisplayName = "On operation create with invalid input should throws ArgumentException")]
         public void CreateOperationShouldReturnArgumentException()
         {
             //Arrange
@@ -19,22 +19,22 @@ namespace CodeMasters.UnitTests
             onCreate.Should().Throw<ArgumentException>().WithMessage("Operation don't exists. (Parameter 'operation')");
         }
 
-        [Theory]
+        [Theory(DisplayName = "On operation create with operation should return correct operation class")]
         [InlineData(OperationTypes.Addition, nameof(Addition))]
         [InlineData(OperationTypes.Multiplication, nameof(Multiplication))]
         [InlineData(OperationTypes.Subtraction, nameof(Subtraction))]
         [InlineData(OperationTypes.Division, nameof(Division))]
         [InlineData(OperationTypes.Remainder, nameof(Remainder))]
-        public void CreateOperationShouldReturnAddition(string operation, string operationClassName)
+        public void CreateOperationShouldReturnConcreteOperation(string operation, string operationClassName)
         {
             //Arrange
             var factory = new OperationFactory();
 
             //Act
-            var addition = factory.CreateOperation(operation);
+            var concreteOperation = factory.CreateOperation(operation);
 
             //Assert
-            var type = addition.GetType();
+            var type = concreteOperation.GetType();
             type.Name.Should().Be(operationClassName);
         }
 
