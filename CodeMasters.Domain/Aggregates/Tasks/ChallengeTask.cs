@@ -14,7 +14,7 @@
         public string Operation { get; private set; }
         public double Left { get; private set; }
         public double Right { get; private set; }
-        public double Result { get; private set; }
+        public double? Result { get; private set; }
         public void SetResult(double result)
         {
             Result = result;
