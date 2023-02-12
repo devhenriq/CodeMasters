@@ -9,8 +9,13 @@ namespace CodeMasters.UnitTests
         [Fact]
         public void CreateOperationShouldReturnArgumentException()
         {
+            //Arrange
             var factory = new OperationFactory();
+
+            //Act
             var onCreate = () => factory.CreateOperation(string.Empty);
+
+            //Assert
             onCreate.Should().Throw<ArgumentException>().WithMessage("Operation don't exists. (Parameter 'operation')");
         }
 
@@ -22,8 +27,13 @@ namespace CodeMasters.UnitTests
         [InlineData(OperationTypes.Remainder, nameof(Remainder))]
         public void CreateOperationShouldReturnAddition(string operation, string operationClassName)
         {
+            //Arrange
             var factory = new OperationFactory();
+
+            //Act
             var addition = factory.CreateOperation(operation);
+
+            //Assert
             var type = addition.GetType();
             type.Name.Should().Be(operationClassName);
         }
