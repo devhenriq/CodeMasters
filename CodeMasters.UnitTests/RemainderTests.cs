@@ -4,7 +4,7 @@ namespace CodeMasters.UnitTests
 {
     public class RemainderTests : UnitTest
     {
-        [Fact]
+        [Fact(DisplayName = "On remainder calculate, should throw DivideByZeroException when right is 0")]
         public void CalculateShouldReturnDivideByZeroException()
         {
             //Arrange
@@ -20,7 +20,7 @@ namespace CodeMasters.UnitTests
             onCalculate.Should().Throw<DivideByZeroException>();
         }
 
-        [Fact]
+        [Fact(DisplayName = "On remainder calculate, should return the remainder of left divided by right")]
         public void CalculateShouldReturnDividedValue()
         {
             //Arrange

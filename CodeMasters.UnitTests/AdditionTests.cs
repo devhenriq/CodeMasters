@@ -5,7 +5,7 @@ namespace CodeMasters.UnitTests
     public class AdditionTests : UnitTest
     {
 
-        [Fact]
+        [Fact(DisplayName = "On addition calculate, should return left summed right")]
         public void CalculateShouldReturnAddedNumbers()
         {
             //Arrange

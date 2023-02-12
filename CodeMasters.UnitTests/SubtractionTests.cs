@@ -4,7 +4,7 @@ namespace CodeMasters.UnitTests
 {
     public class SubtractionTests : UnitTest
     {
-        [Fact]
+        [Fact(DisplayName = "On subtraction calculate, should return left subtracted by right")]
         public void CalculateShouldReturnSubtractedResult()
         {
             //Arrange

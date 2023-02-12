@@ -5,7 +5,7 @@ namespace CodeMasters.UnitTests
     public class MultiplicationTests : UnitTest
 
     {
-        [Fact]
+        [Fact(DisplayName = "On multiplication calculate, should return left multiplied by right")]
         public void CalculateShouldReturnMultipliedResult()
         {
             //Arrange
