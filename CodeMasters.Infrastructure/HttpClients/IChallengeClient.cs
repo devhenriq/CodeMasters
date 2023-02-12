@@ -9,6 +9,6 @@ namespace CodeMasters.Infrastructure.HttpClients
         Task<ChallengeTask> GetTaskAsync();
 
         [Post("/submit-task")]
-        Task SubmitTaskAsync(SubmitTaskRequest request);
+        Task SubmitTaskAsync(ChallengeTask request);
     }
 }

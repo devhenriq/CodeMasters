@@ -3,9 +3,9 @@ using CodeMasters.Domain.Exceptions;
 using CodeMasters.Infrastructure.Context;
 using CodeMasters.Infrastructure.HttpClients;
 using CodeMasters.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+using CodeMasters.IntegrationTests.Factories;
 using Microsoft.Extensions.Logging;
-
+using System.Net;
 
 namespace CodeMasters.IntegrationTests
 {
@@ -13,16 +13,10 @@ namespace CodeMasters.IntegrationTests
     {
         private readonly ChallengeContext _context;
         private readonly Faker _faker;
-        private readonly SubmitTaskRequest _submitTaskRequest;
         public TaskRepositoryTests()
         {
-            var builder = new DbContextOptionsBuilder<ChallengeContext>();
-            builder.UseInMemoryDatabase("TestChallengeDb");
-            _context = new ChallengeContext(builder.Options);
-            _context.Database.EnsureDeleted();
-
+            _context = TestDbContextFactory.CreateFakeDb();
             _faker = new Faker();
-
         }
 
         [Fact]
@@ -58,7 +52,7 @@ namespace CodeMasters.IntegrationTests
             expectedTask.SetResult(expectedTask.Left * expectedTask.Right);
 
             var challengeClientMock = new Mock<IChallengeClient>();
-            challengeClientMock.Setup(client => client.SubmitTaskAsync(new SubmitTaskRequest(expectedTask.Id, expectedTask.Left * expectedTask.Right))).Returns(Task.CompletedTask);
+            challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).Returns(Task.CompletedTask);
 
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
             await taskRepository.SubmitAsync(expectedTask);
@@ -74,7 +68,7 @@ namespace CodeMasters.IntegrationTests
             _context.SaveChanges();
             expectedTask.SetResult(_faker.Random.Double());
             var challengeClientMock = new Mock<IChallengeClient>();
-            challengeClientMock.Setup(client => client.SubmitTaskAsync(new SubmitTaskRequest(expectedTask.Id, expectedTask.Left * expectedTask.Right))).ThrowsAsync(new InvalidInputException("Submit task"));
+            challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).ThrowsAsync(await ApiExceptionFactory.CreateAsync(HttpStatusCode.BadRequest));
 
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
             var act = async () => await taskRepository.SubmitAsync(expectedTask);
@@ -90,20 +84,11 @@ namespace CodeMasters.IntegrationTests
             expectedTask.SetResult(_faker.Random.Double());
 
             var challengeClientMock = new Mock<IChallengeClient>();
-            challengeClientMock.Setup(client => client.SubmitTaskAsync(new SubmitTaskRequest(expectedTask.Id, expectedTask.Left * expectedTask.Right))).ThrowsAsync(new EntityNotFoundException("Task"));
+            challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).ThrowsAsync(await ApiExceptionFactory.CreateAsync(HttpStatusCode.NotFound));
 
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
             var act = async () => await taskRepository.SubmitAsync(expectedTask);
             await act.Should().ThrowAsync<EntityNotFoundException>();
-        }
-        [Fact]
-        public async Task SubmitAsyncShouldThrowInvalidInputExceptionWhenResultIsEmpty()
-        {
-            var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
-            var challengeClientMock = new Mock<IChallengeClient>();
-            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
-            var act = async () => await taskRepository.SubmitAsync(expectedTask);
-            await act.Should().ThrowAsync<InvalidInputException>();
         }
     }
 }

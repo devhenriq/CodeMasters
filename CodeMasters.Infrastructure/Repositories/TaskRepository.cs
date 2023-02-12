@@ -42,8 +42,7 @@ namespace CodeMasters.Infrastructure.Repositories
             try
             {
                 _logger.LogInformation($"Submit task, input: {JsonSerializer.Serialize(task)}");
-                if (!task.Result.HasValue) throw new InvalidInputException("Result's not registered");
-                await _challengeApi.SubmitTaskAsync(new SubmitTaskRequest(task.Id, task.Result.Value));
+                await _challengeApi.SubmitTaskAsync(task);
                 _challengeContext.SaveChanges();
             }
             catch (ApiException ex)

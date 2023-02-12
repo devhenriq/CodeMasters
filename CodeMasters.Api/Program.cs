@@ -27,3 +27,5 @@ app.UseAuthorization();
 app.UseDomain();
 app.MapControllers();
 app.Run();
+
+public partial class Program { }
