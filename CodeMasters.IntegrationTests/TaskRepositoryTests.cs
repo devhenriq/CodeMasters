@@ -23,7 +23,7 @@ namespace CodeMasters.IntegrationTests
         public async Task GetAsyncShouldReturnChallengeClientTask()
         {
             //Arrange
-            var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
+            var expectedTask = GetMockedExpectedTask();
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.GetTaskAsync()).ReturnsAsync(expectedTask);
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
@@ -39,7 +39,8 @@ namespace CodeMasters.IntegrationTests
         public async Task GetAsyncShouldSaveChallengeClientTaskOnDatabase()
         {
             //Arrange
-            var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
+            var expectedTask = GetMockedExpectedTask();
+
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.GetTaskAsync()).ReturnsAsync(expectedTask);
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
@@ -55,7 +56,8 @@ namespace CodeMasters.IntegrationTests
         public async Task SubmitAsyncShouldSaveChallengeResultOnDabatase()
         {
             //Arrange
-            var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
+            var expectedTask = GetMockedExpectedTask();
+
             _context.Add(expectedTask);
             _context.SaveChanges();
             expectedTask.SetResult(expectedTask.Left * expectedTask.Right);
@@ -76,7 +78,7 @@ namespace CodeMasters.IntegrationTests
         public async Task SubmitAsyncShouldThrowInvalidInputExceptionWhenChallengeClientThrowsException()
         {
             //Arrange
-            var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
+            var expectedTask = GetMockedExpectedTask();
             _context.Add(expectedTask);
             _context.SaveChanges();
             expectedTask.SetResult(_faker.Random.Double());
@@ -96,7 +98,7 @@ namespace CodeMasters.IntegrationTests
         public async Task SubmitAsyncShouldThrowEntityNotFoundExceptionWhenChallengeClientThrowsException()
         {
             //Arrange
-            var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
+            var expectedTask = GetMockedExpectedTask();
             _context.Add(expectedTask);
             _context.SaveChanges();
             expectedTask.SetResult(_faker.Random.Double());
@@ -111,6 +113,12 @@ namespace CodeMasters.IntegrationTests
 
             //Assert
             await onSubmit.Should().ThrowAsync<EntityNotFoundException>();
+        }
+
+        private ChallengeTask GetMockedExpectedTask()
+        {
+            var operation = _faker.PickRandom("addition", "remainder", "division", "multiplication", "subtract");
+            return new ChallengeTask(Guid.NewGuid(), operation, _faker.Random.Double(), _faker.Random.Double());
         }
     }
 }
