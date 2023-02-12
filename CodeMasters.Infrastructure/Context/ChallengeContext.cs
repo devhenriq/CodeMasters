@@ -1,4 +1,4 @@
-﻿using CodeMasters.Domain.Entities;
+﻿using CodeMasters.Domain.Aggregates.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeMasters.Infrastructure.Context

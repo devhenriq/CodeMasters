@@ -1,4 +1,4 @@
-﻿using CodeMasters.Domain.Entities.Operations;
+﻿using CodeMasters.Domain.Aggregates.Operations;
 
 namespace CodeMasters.UnitTests
 {

@@ -1,4 +1,4 @@
-﻿namespace CodeMasters.Domain.Entities.Operations
+﻿namespace CodeMasters.Domain.Aggregates.Operations
 {
     public interface IOperation
     {

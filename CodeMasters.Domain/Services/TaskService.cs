@@ -1,5 +1,4 @@
 ﻿using CodeMasters.Domain.Aggregates.Tasks;
-using CodeMasters.Domain.Entities;
 using CodeMasters.Domain.Factories;
 
 namespace CodeMasters.Domain.Services

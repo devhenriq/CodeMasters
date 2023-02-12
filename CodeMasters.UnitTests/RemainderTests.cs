@@ -17,8 +17,8 @@ namespace CodeMasters.UnitTests
 
             var remainder = new Remainder();
 
-            var act = () => remainder.Calculate(left, right);
-            act.Should().Throw<DivideByZeroException>();
+            var onCalculate = () => remainder.Calculate(left, right);
+            onCalculate.Should().Throw<DivideByZeroException>();
         }
 
         [Fact]

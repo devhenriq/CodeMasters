@@ -1,4 +1,6 @@
-﻿namespace CodeMasters.Domain.Entities.Operations
+﻿using CodeMasters.Domain.Aggregates.Operations;
+
+namespace CodeMasters.Domain.Entities.Operations
 {
     public class Subtraction : IOperation
     {

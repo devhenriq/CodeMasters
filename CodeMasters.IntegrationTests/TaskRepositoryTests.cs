@@ -1,4 +1,4 @@
-using CodeMasters.Domain.Entities;
+using CodeMasters.Domain.Aggregates.Tasks;
 using CodeMasters.Domain.Exceptions;
 using CodeMasters.Infrastructure.Context;
 using CodeMasters.Infrastructure.HttpClients;
@@ -71,8 +71,8 @@ namespace CodeMasters.IntegrationTests
             challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).ThrowsAsync(await ApiExceptionFactory.CreateAsync(HttpStatusCode.BadRequest));
 
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
-            var act = async () => await taskRepository.SubmitAsync(expectedTask);
-            await act.Should().ThrowAsync<InvalidInputException>();
+            var onSubmit = async () => await taskRepository.SubmitAsync(expectedTask);
+            await onSubmit.Should().ThrowAsync<InvalidInputException>();
         }
 
         [Fact]
@@ -87,8 +87,8 @@ namespace CodeMasters.IntegrationTests
             challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).ThrowsAsync(await ApiExceptionFactory.CreateAsync(HttpStatusCode.NotFound));
 
             var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
-            var act = async () => await taskRepository.SubmitAsync(expectedTask);
-            await act.Should().ThrowAsync<EntityNotFoundException>();
+            var onSubmit = async () => await taskRepository.SubmitAsync(expectedTask);
+            await onSubmit.Should().ThrowAsync<EntityNotFoundException>();
         }
     }
 }

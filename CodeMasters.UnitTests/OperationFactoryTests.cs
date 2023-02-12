@@ -10,8 +10,8 @@ namespace CodeMasters.UnitTests
         public void CreateOperationShouldReturnArgumentException()
         {
             var factory = new OperationFactory();
-            var act = () => factory.CreateOperation(string.Empty);
-            act.Should().Throw<ArgumentException>().WithMessage("Operation don't exists. (Parameter 'operation')");
+            var onCreate = () => factory.CreateOperation(string.Empty);
+            onCreate.Should().Throw<ArgumentException>().WithMessage("Operation don't exists. (Parameter 'operation')");
         }
 
         [Theory]

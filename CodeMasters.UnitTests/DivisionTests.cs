@@ -1,4 +1,4 @@
-﻿using CodeMasters.Domain.Entities.Operations;
+﻿using CodeMasters.Domain.Aggregates.Operations;
 
 namespace CodeMasters.UnitTests
 {
@@ -17,8 +17,8 @@ namespace CodeMasters.UnitTests
 
             var division = new Division();
 
-            var act = () => division.Calculate(left, right);
-            act.Should().Throw<DivideByZeroException>();
+            var onCalculate = () => division.Calculate(left, right);
+            onCalculate.Should().Throw<DivideByZeroException>();
         }
 
         [Fact]

@@ -1,4 +1,4 @@
-﻿using CodeMasters.Domain.Entities;
+﻿using CodeMasters.Domain.Aggregates.Tasks;
 using CodeMasters.Infrastructure.Context;
 using CodeMasters.Infrastructure.HttpClients;
 using CodeMasters.Infrastructure.Repositories;
