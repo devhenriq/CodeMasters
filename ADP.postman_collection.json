@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "0738730f-ec4e-49a1-993b-1994d6943e9b",
+		"name": "ADP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7629842"
+	},
+	"item": [
+		{
+			"name": "Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"task"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sucessful Task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7195/task",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7195",
+							"path": [
+								"task"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Feb 2023 06:13:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "List executed tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7195/task",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7195",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample list",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7195/task",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7195",
+							"path": [
+								"task"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Feb 2023 06:14:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"efb65b2c-83fe-424f-b997-727223091651\",\n        \"operation\": \"subtraction\",\n        \"left\": -3765153517715619,\n        \"right\": 7925758437780817,\n        \"result\": -11690911955496436\n    },\n    {\n        \"id\": \"29ef1f9d-de59-4b2c-8fbb-d006d7e98e4d\",\n        \"operation\": \"division\",\n        \"left\": -6101120461189423,\n        \"right\": 4024865776735861,\n        \"result\": -1.5158568756390656\n    }\n]"
+				}
+			]
+		}
+	]
+}
