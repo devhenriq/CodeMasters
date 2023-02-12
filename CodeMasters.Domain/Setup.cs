@@ -4,7 +4,7 @@ using CodeMasters.Domain.Handlers;
 using CodeMasters.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CodeMasters.Domain
 {

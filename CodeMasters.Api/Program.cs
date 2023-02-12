@@ -1,24 +1,24 @@
 using CodeMasters.Domain;
 using CodeMasters.Infrastructure;
+using Serilog;
+using ILogger = Serilog.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDomain();
 builder.Services.AddInfrastructure(builder.Configuration);
-using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
-    .SetMinimumLevel(LogLevel.Trace)
-    .AddConsole());
+builder.Logging.ClearProviders();
+ILogger logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
 
-ILogger logger = loggerFactory.CreateLogger<Program>();
+builder.Logging.AddSerilog(logger);
+builder.Services.AddSingleton(logger);
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -32,4 +32,4 @@ app.UseDomain(logger);
 app.MapControllers();
 app.Run();
 
-public partial class Program { }
+public partial class Program { protected Program() { } }
