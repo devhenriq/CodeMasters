@@ -11,7 +11,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDomain();
 builder.Services.AddInfrastructure(builder.Configuration);
+using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+    .SetMinimumLevel(LogLevel.Trace)
+    .AddConsole());
 
+ILogger logger = loggerFactory.CreateLogger<Program>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseDomain();
+app.UseDomain(logger);
 app.MapControllers();
 app.Run();
 

@@ -4,6 +4,7 @@ using CodeMasters.Domain.Handlers;
 using CodeMasters.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CodeMasters.Domain
 {
@@ -15,9 +16,9 @@ namespace CodeMasters.Domain
             services.AddScoped<ITaskService, TaskService>();
         }
 
-        public static void UseDomain(this IApplicationBuilder app)
+        public static void UseDomain(this IApplicationBuilder app, ILogger logger)
         {
-            app.AddExceptionHandler();
+            app.AddExceptionHandler(logger);
         }
     }
 }
