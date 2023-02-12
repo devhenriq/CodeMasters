@@ -26,25 +26,25 @@ namespace CodeMasters.IntegrationTests
 
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.GetTaskAsync()).ReturnsAsync(expectedTask);
-            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
+            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
             var task = await taskRepository.GetAsync();
             task.Id.Should().Be(expectedTask.Id);
         }
 
         [Fact]
-        public async Task GetAsyncShouldSaveChallengeClientTaskOnDabase()
+        public async Task GetAsyncShouldSaveChallengeClientTaskOnDatabase()
         {
             var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.GetTaskAsync()).ReturnsAsync(expectedTask);
-            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
+            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
             await taskRepository.GetAsync();
 
             _context.Tasks.FirstOrDefault(task => task.Id == expectedTask.Id).Should().NotBeNull();
         }
 
         [Fact]
-        public async Task SubmitAsyncShouldSaveChallengeClientResultOnDabatase()
+        public async Task SubmitAsyncShouldSaveChallengeResultOnDabatase()
         {
             var expectedTask = new ChallengeTask(Guid.NewGuid(), "multiplication", _faker.Random.Double(), _faker.Random.Double());
             _context.Add(expectedTask);
@@ -54,7 +54,7 @@ namespace CodeMasters.IntegrationTests
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).Returns(Task.CompletedTask);
 
-            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
+            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
             await taskRepository.SubmitAsync(expectedTask);
 
             _context.Tasks.First(task => task.Id == expectedTask.Id).Result.Should().Be(expectedTask.Result);
@@ -70,7 +70,7 @@ namespace CodeMasters.IntegrationTests
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).ThrowsAsync(await ApiExceptionFactory.CreateAsync(HttpStatusCode.BadRequest));
 
-            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
+            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
             var onSubmit = async () => await taskRepository.SubmitAsync(expectedTask);
             await onSubmit.Should().ThrowAsync<InvalidInputException>();
         }
@@ -86,7 +86,7 @@ namespace CodeMasters.IntegrationTests
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.SubmitTaskAsync(expectedTask)).ThrowsAsync(await ApiExceptionFactory.CreateAsync(HttpStatusCode.NotFound));
 
-            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, new Mock<ILogger<TaskRepository>>().Object);
+            var taskRepository = new TaskRepository(challengeClientMock.Object, _context, Mock.Of<ILogger<TaskRepository>>());
             var onSubmit = async () => await taskRepository.SubmitAsync(expectedTask);
             await onSubmit.Should().ThrowAsync<EntityNotFoundException>();
         }
