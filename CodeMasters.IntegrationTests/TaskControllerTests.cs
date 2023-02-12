@@ -22,24 +22,29 @@ namespace CodeMasters.IntegrationTests
         [Fact]
         public async Task GetShouldReturnOk()
         {
+            //Arrange
             var client = _factory.CreateClient();
-
+            //Act
             var response = await client.GetAsync("/task");
+            //Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
         [Fact]
-        public async Task ExecuteAsyncShouldReturnOk()
+        public async Task ExecuteAsyncShouldReturnNoContent()
         {
+            //Arrange
             var client = _factory.CreateClient();
-
+            //Arrange
             var response = await client.PostAsync("/task", null);
+            //Assert
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task ExecuteAsyncShouldReturnNotFound()
         {
+            //Arrange
             var task = new ChallengeTask(Guid.NewGuid(), "addition", 0, 0);
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.GetTaskAsync()).ReturnsAsync(task);
@@ -54,13 +59,17 @@ namespace CodeMasters.IntegrationTests
                 })
             ).CreateClient();
 
+            //Act
             var response = await client.PostAsync("/task", null);
+
+            //Assert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
         [Fact]
         public async Task ExecuteAsyncShouldReturnBadRequest()
         {
+            //Arrange
             var task = new ChallengeTask(Guid.NewGuid(), "addition", 0, 0);
             var challengeClientMock = new Mock<IChallengeClient>();
             challengeClientMock.Setup(client => client.GetTaskAsync()).ReturnsAsync(task);
@@ -75,7 +84,10 @@ namespace CodeMasters.IntegrationTests
                 })
             ).CreateClient();
 
+            //Act
             var response = await client.PostAsync("/task", null);
+
+            //Assert
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
     }
