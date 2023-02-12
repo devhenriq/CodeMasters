@@ -25,7 +25,7 @@ namespace CodeMasters.Api.Controllers
         public async Task<IActionResult> ExecuteAsync()
         {
             await _taskService.ExecuteAsync();
-            return Ok();
+            return NoContent();
         }
     }
 }

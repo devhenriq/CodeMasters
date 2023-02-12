@@ -34,7 +34,7 @@ namespace CodeMasters.IntegrationTests
             var client = _factory.CreateClient();
 
             var response = await client.PostAsync("/task", null);
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
         [Fact]
