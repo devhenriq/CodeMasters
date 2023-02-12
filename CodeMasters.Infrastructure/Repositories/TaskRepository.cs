@@ -25,7 +25,7 @@ namespace CodeMasters.Infrastructure.Repositories
         public async Task<ChallengeTask> GetAsync()
         {
             var task = await _challengeApi.GetTaskAsync();
-            _logger.LogInformation($"Get task, input: {JsonSerializer.Serialize(task)}");
+            _logger.LogInformation("Get task, input: {Task}", JsonSerializer.Serialize(task));
 
             _challengeContext.Add(task);
             _challengeContext.SaveChanges();
@@ -41,7 +41,7 @@ namespace CodeMasters.Infrastructure.Repositories
         {
             try
             {
-                _logger.LogInformation($"Submit task, input: {JsonSerializer.Serialize(task)}");
+                _logger.LogInformation("Submit task, input: {Task}", JsonSerializer.Serialize(task));
                 await _challengeApi.SubmitTaskAsync(task);
                 _challengeContext.SaveChanges();
             }

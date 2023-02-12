@@ -22,7 +22,7 @@ namespace CodeMasters.Domain.Handlers
                         EntityNotFoundException => StatusCodes.Status404NotFound,
                         _ => StatusCodes.Status500InternalServerError
                     };
-                    logger.LogError(exceptionFeature.Error.Message);
+                    logger.LogError("Error message: {Error}", exceptionFeature.Error.Message);
                     context.Response.StatusCode = httpStatusCode;
                     context.Response.ContentType = Text.Plain;
                     await context.Response.WriteAsync(exceptionFeature.Error.Message);
