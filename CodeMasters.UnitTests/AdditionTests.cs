@@ -2,14 +2,15 @@ using CodeMasters.Domain.Aggregates.Operations;
 
 namespace CodeMasters.UnitTests
 {
-    public class AdditionTests
+    public class AdditionTests : UnitTest
     {
+
         [Fact]
         public void CalculateShouldReturnAddedNumbers()
         {
-            var left = 5;
-            var right = 6;
-            var expected = 11;
+            var left = _faker.Random.Double();
+            var right = _faker.Random.Double();
+            var expected = left + right;
 
             var addition = new Addition();
 

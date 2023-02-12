@@ -2,14 +2,14 @@
 
 namespace CodeMasters.UnitTests
 {
-    public class SubtractionTests
+    public class SubtractionTests : UnitTest
     {
         [Fact]
         public void CalculateShouldReturnSubtractedResult()
         {
-            var left = 5;
-            var right = 6;
-            var expected = -1;
+            var left = _faker.Random.Double();
+            var right = _faker.Random.Double();
+            var expected = left - right;
 
             var subtraction = new Subtraction();
 

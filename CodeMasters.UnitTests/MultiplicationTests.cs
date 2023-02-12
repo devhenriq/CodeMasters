@@ -2,15 +2,15 @@
 
 namespace CodeMasters.UnitTests
 {
-    public class MultiplicationTests
+    public class MultiplicationTests : UnitTest
 
     {
         [Fact]
         public void CalculateShouldReturnMultipliedResult()
         {
-            var left = 5;
-            var right = 2;
-            var expected = 10;
+            var left = _faker.Random.Double();
+            var right = _faker.Random.Double();
+            var expected = left * right;
 
             var multiplication = new Multiplication();
 

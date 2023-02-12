@@ -2,18 +2,13 @@
 
 namespace CodeMasters.UnitTests
 {
-    public class RemainderTests
+    public class RemainderTests : UnitTest
     {
-        private readonly Faker _faker;
-        public RemainderTests()
-        {
-            _faker = new Faker();
-        }
         [Fact]
         public void CalculateShouldReturnDivideByZeroException()
         {
             var left = _faker.Random.Double();
-            var right = 0;
+            const double right = 0;
 
             var remainder = new Remainder();
 
@@ -24,9 +19,9 @@ namespace CodeMasters.UnitTests
         [Fact]
         public void CalculateShouldReturnDividedValue()
         {
-            var left = 10;
-            var right = 6;
-            var expected = 4;
+            var left = _faker.Random.Double();
+            var right = _faker.Random.Double();
+            var expected = left % right;
             var remainder = new Remainder();
 
             var result = remainder.Calculate(left, right);
